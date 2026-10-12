@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6d28d9">
+  <title>Big Vibes - Connect & Share</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f3ff;
+      color: #241044;
+    }
+    header {
+      background: #6d28d9;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 6px; }
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0 14px;
+    }
+    .card {
+      background: white;
+      padding: 18px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 12px #24104410;
+    }
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px;
+      border: 1px solid #ddd6fe;
+      border-radius: 10px;
+      font: inherit;
+      resize: vertical;
+    }
+    button {
+      background: #6d28d9;
+      color: white;
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .post { border-top: 1px solid #eee; padding-top: 12px; }
+    .muted { color: #6b6478; font-size: 14px; }
+    footer { text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💜 Big Vibes</h1>
+    <p>Connect. Share. Feel the vibes.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Welcome to Big Vibes!</h2>
+      <p>Meet people, share moments, and spread positivity.</p>
+      <p class="muted">
+        Website preview: posts are saved only in this browser.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>What's on your mind?</h2>
+      <form id="post-form">
+        <textarea id="message" maxlength="500"
+          placeholder="Share something positive..."
+          required></textarea>
+        <p><button type="submit">Share post</button></p>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Community feed</h2>
+      <div id="feed">
+        <p class="muted">Be the first to share a vibe!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="muted">
+    Big Vibes © 2026 · Made with 💜
+  </footer>
+
+  <script>
+    const form = document.getElementById("post-form");
+    const message = document.getElementById("message");
+    const feed = document.getElementById("feed");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const content = message.value.trim();
+      if (!content) return;
+
+      if (feed.querySelector(".muted")) {
+        feed.replaceChildren();
+      }
+
+      const post = document.createElement("article");
+      post.className = "post";
+
+      const author = document.createElement("strong");
+      author.textContent = "Big Vibes visitor";
+
+      const text = document.createElement("p");
+      text.textContent = content;
+
+      const time = document.createElement("p");
+      time.className = "muted";
+      time.textContent = new Date().toLocaleString();
+
+      post.append(author, text, time);
+      feed.prepend(post);
+      message.value = "";
+    });
+  </script>
+</body>
+</html>
